@@ -90,7 +90,10 @@
         .sort-indicator {
             font-size: 0.8em;
             margin-left: 5px;
-            opacity: 0.5; /* Κρύβουμε τα βελάκια εκτός από την ενεργή στήλη */
+            opacity: 0.5; /* Προεπιλογή για μη ενεργές στήλες */
+        }
+        .sort-indicator::before {
+            content: " ↕"; /* Εμφάνιση ουδέτερου διπλού βέλους σε κάθε στήλη */
         }
         th.sorted .sort-indicator {
             opacity: 1; /* Εμφανίζουμε το βέλος της ενεργής στήλης */
