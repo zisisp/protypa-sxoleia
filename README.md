@@ -1,1 +1,1 @@
-# protypa-sxoleia
+# Πρότυπα σχολεία
