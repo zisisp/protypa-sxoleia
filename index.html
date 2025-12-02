@@ -32,7 +32,7 @@
             padding: 5px 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            width: 50px;
+            width: 70px;
             text-align: center;
             background-color: #f9f9f9;
         }
@@ -114,7 +114,7 @@
     <h2>Βαθμός μαθητή:</h2>
     <div id="threshold-container">
         <button class="spin-button" onclick="changeThreshold(-1)">–</button>
-        <span id="threshold-value">72</span>
+        <input id="threshold-value" type="number" aria-label="Βαθμός μαθητή" value="72">
         <button class="spin-button" onclick="changeThreshold(1)">+</button>
     </div>
 </div>
@@ -226,8 +226,17 @@
     // Συνάρτηση για την αύξηση/μείωση του ορίου (λειτουργία +/-)
     function changeThreshold(amount) {
         threshold += amount;
-        thresholdElement.textContent = threshold;
+        thresholdElement.value = threshold;
         applyConditionalFormatting();
+    }
+
+    // Συνάρτηση για την ενημέρωση του ορίου από την άμεση εισαγωγή χρήστη
+    function updateThresholdFromInput() {
+        const value = parseFloat(thresholdElement.value);
+        if (!isNaN(value)) {
+            threshold = value;
+            applyConditionalFormatting();
+        }
     }
 
     // Συνάρτηση για το φιλτράρισμα του πίνακα (Text Search Filter)
@@ -329,8 +338,12 @@
     // Αρχική φόρτωση του πίνακα και ταξινόμηση (π.χ. με το όνομα του σχολείου)
     sortTable('scholeia', true); // Ταξινόμηση βάσει 'scholeia' κατά την αρχική φόρτωση
 
+    // Προσθήκη ακρόασης για άμεση επεξεργασία του βαθμού
+    thresholdElement.addEventListener('input', updateThresholdFromInput);
+
     // Εκθέτουμε τις συναρτήσεις στο window
     window.changeThreshold = changeThreshold;
+    window.updateThresholdFromInput = updateThresholdFromInput;
     window.filterTable = filterTable;
     window.sortTable = sortTable;
 </script>
